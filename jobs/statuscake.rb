@@ -18,14 +18,14 @@ SCHEDULER.every config.frequency, first_in: 0 do
       site_test["TestID"]
     end
     test_ids.each do |testid|
-      response = Net::HTTP.get_response(URI("https://www.statuscake.com/API/Tests/Details/?TestID=#{testid}&Username=#{username}&API=#{key}"))
+      response = Net::HTTP.get_response(URI("https://www.statuscake.com/API/Tests/Details/?TestID=#{testid}&Username=#{username}&API=#{secret_key}"))
       website = JSON.parse(response.body)
       if website['Status']!='Up'
+        logger.info(website['Status'])
         items << { site: website['WebsiteName'], status: website['Status'], lasttest: website['LastTested'] }
         status='warning'
       end
     end
-    logger.info(items)
     if items.count > 0
       send_event(key, { "current" => items.count, "background-color" => 'red' })
     else
