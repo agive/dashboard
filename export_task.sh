@@ -1,9 +1,7 @@
-cd /Users/camillebaldock/Code/Quantified\ Camille/dashboard
+cd /Users/camillebaldock/Code/Quantified/dashboard
 echo "Starting"
 source environment.sh
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-bundle install
-bundle exec ruby scripts/plex.rb
-bundle exec ruby scripts/pocket_casts.rb
-bundle exec ruby scripts/project_euler.rb
+/usr/local/bin/bundle exec ruby scripts/plex.rb
+/usr/local/bin/bundle exec ruby scripts/pocket_casts.rb
+/usr/local/bin/bundle exec ruby scripts/go_watch_it.rb
 echo "Export over"
